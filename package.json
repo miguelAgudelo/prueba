@@ -1,0 +1,28 @@
+{
+  "name": "prueba",
+  "version": "1.0.0",
+  "description": "Prueba para OrbitDevs por Miguel Agudelo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miguelAgudelo/prueba.git"
+  },
+  "author": "Miguel Agudelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miguelAgudelo/prueba/issues"
+  },
+  "homepage": "https://github.com/miguelAgudelo/prueba#readme",
+   "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "angular": "^1.6.1",
+    "bootstrap": "^3.3.7",
+    "browser-sync": "^2.18.8",
+    "jquery": "^3.1.1"
+  }
+}

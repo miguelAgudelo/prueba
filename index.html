@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+	<title>Prueba para OrbiDevs</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/node_modules/angular/angular.min.js"></script>
+	<script type="text/javascript" src="/js/app.js"></script>
+</head>
+<body ng-controller="firstController">
+<div class="" ng-clock>
+	<div class="alert alert-success text-center" role="alert" ng-show="alert==1">Your post is save</div>
+	<div class="alert alert-success text-center" role="alert" ng-show="alert==2">your post is edit</div>
+	<div class="alert alert-danger text-center" role="alert"  ng-show="alert==3">your post is delete</div>
+</div>
+<div class="lf" ng-clock>
+	<button class="btn btn-default" ng-click="showme(1)">Go to Home!</button>
+	<button ng-hide="content==1" class="btn btn-default" ng-click="showme(2)">Post</button>
+</div>
+<div class="container" ng-clock>
+	<div class="titulo">
+	<h2>Prueba para OrbitDevs</h2>
+	</div>
+	<div ng-repeat="user in users" ng-show="content==1">
+		<div class="col-md-5 card">
+			<h3 class="titulo">{{user.username}}</h3>
+			<h4><strong>Name: </strong>{{user.name}}</h4>
+			<h4><strong>email: </strong>{{user.email}}</h4>
+			<h4><strong>Website: </strong><a href="http://{{user.website}}">{{user.website}}</a><h4>
+			<div class="cetr">
+				<button type="button" class="btn btn-primary" ng-click="readMore(user.id)">Read More</button>
+			</div>
+		</div>
+	</div>
+	<div ng-controller="userController">
+	<div ng-show="content==2">
+		<div class="col-md-12 card2">
+			<h2 class="titulo">{{user.username}}</h2>
+			<h4><strong>Name: </strong>{{user.name}}</h4>
+			<h4><strong>email: </strong>{{user.email}}</h4>
+			<h4><strong>phone: </strong>{{user.phone}}</h4>
+			<h4><strong>Website: </strong><a href="http://{{user.website}}">{{user.website}}</a><h4>			
+			<div class="col-md-6">
+				<h4 class="titulo">Address</h4>
+				<h4><strong>City: </strong>{{user.address.city}}</h4>
+				<h4><strong>Street: </strong>{{user.address.street}}</h4>
+				<h4><strong>Suite: </strong>{{user.address.suite}}</h4>
+				<h4><strong>Zip-Code: </strong>{{user.address.zipcode}}</h4>
+			</div>
+			<div class="col-md-6">
+				<h4 class="titulo">Company</h4>
+				<h4><strong>Nombre: </strong>{{user.company.name}}</h4>
+				<h4><strong>Slogan: </strong>{{user.company.catchPhrase}}</h4>
+				<h4><strong>Bs: </strong>{{user.company.bs}}</h4>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<h4 class="titulo dd">{{user.username}} Posts</h4><button type="button" class="btn btn-success" ng-click="newPost()">New Post</button>
+		</div>
+		<div ng-repeat="post in posts">
+			<div class="col-md-12 card3" ng-show="post">
+				<div class="lf">
+			 		<button type="button" class="btn btn-warning btn-xs" ng-click="editPost(post.id)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+			 		<button type="button" class="btn btn-danger btn-xs" ng-click="deletePost(post.id)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+			 	</div>
+			 	<div class="col-md-12">
+				 	<h4 class="text-center dd">{{post.title}}</h4>
+				 	<p class="text-justify">{{post.body}}</p>
+				 	<div class="cetr">
+				 		<button type="button" class="btn btn-primary" ng-click="tabCom(post.id)" data-toggle="collapse" data-target="#demo">Comments</button>
+				 	</div>
+				 	<div ng-show="comentario==post.id">
+					 	<div ng-repeat="comment in comments">
+					 		<div class="col-md-12" id="demo" class="collapse">
+					 			<h5>{{comment.name}}</h5>
+					 			<h6><strong>from: </strong>{{comment.email}}</h5>
+					 			<p class="text-justify">
+					 				{{comment.body}}
+					 			</p>
+					 		</div>
+					 	</div>
+				 	</div>
+			 	</div>
+			</div>
+		</div>
+		</div>
+		<div ng-show="content==3" class="card3">
+			<h4 class="titulo">New Post for {{user.username}}</h4>
+			<form ng-submit="create()">	  
+				<div class="form-group">
+					<label>Title</label>
+					<input type="text" class="form-control" placeholder="Title of the post" ng-model="title" required>
+				</div>
+				<div class="form-group">
+					<label>Body of the Post</label>
+					<textarea class="form-control" rows="4" ng-model="body" required></textarea>
+				</div>
+				<div class="form-group cetr">
+					<button type="submit" class="btn btn-success">Create</button>
+				</div>	  
+			</form>
+		</div>
+		<div ng-show="content==4" class="card3">
+			<h4 class="titulo">Edit Post for {{user.username}}</h4>
+			<form ng-submit="edit()">	  
+				<div class="form-group">
+					<label>Title</label>
+					<input type="text" class="form-control" ng-model="title" required>
+				</div>
+				<div class="form-group">
+					<label>Body of the Post</label>
+					<textarea class="form-control" rows="4" ng-model="body" required></textarea>
+				</div>
+				<div class="form-group cetr">
+					<button type="submit" class="btn btn-success">Update</button>
+				</div>	  
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
